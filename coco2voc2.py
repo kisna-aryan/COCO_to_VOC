@@ -157,7 +157,9 @@ class Dataset():
             'objectInfo': []
         }  # Create a vocInfo dictionary to store the information needed by voc
         imageInfo = self.coco.loadImgs(ids=[imgId])[0]  # image information
-        annotationsInfo = self.coco.loadAnns(ids=[imgId])  # Comment information
+        gt_ann_ids = self.coco.getAnnIds(imgIds=[imgId])        # added 20210719
+        annotationsInfo = self.coco.loadAnns(gt_ann_ids)  # Comment information
+        # annotationsInfo = self.coco.loadAnns(ids=[imgId])  # Comment information
         vocInfo['folder'] = self.annFloder
         vocInfo['filename'] = imageInfo['file_name']  # Fill in the filename
         vocInfo['sizeInfo']['width'] = imageInfo['width']
