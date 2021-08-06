@@ -214,7 +214,7 @@ class Dataset():
 
 if __name__ == '__main__':
     label = 'test'
-    # jsonPath = '../../../{}/landslide_{}_google_20191115.json'.format(label, label)
+    # jsonPath = '../../../{}/landslide_{}_google_20191115.json'.format(label, label) pull request
     parser = argparse.ArgumentParser(description='Coco to voc')
     parser.add_argument('--json_path', type=str, default=None,
         help='path to annotation files directory. It is not need when use --ann_paths_list')
