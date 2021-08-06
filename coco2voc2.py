@@ -191,7 +191,7 @@ class Dataset():
             vocInfo['objectInfo'].append(objectInfo)
         return vocInfo
 
-    def convertXML(self):
+    def convertXML(self, annFolder):
         savePath = annFolder + '/' + 'Annotations/'  # The file is generated under the current program folder
         if not os.path.exists(savePath):  # Create if there is no folder
             os.makedirs(savePath)
@@ -214,10 +214,12 @@ class Dataset():
 
 if __name__ == '__main__':
     label = 'test'
-    annFolder = '/media/kisna/nano_ti_data/DL_git/FLIRrgb_TFODAPI/flirRGB/test'
-
     # jsonPath = '../../../{}/landslide_{}_google_20191115.json'.format(label, label)
-    jsonPath = '/media/kisna/nano_ti_data/DL_git/FLIRrgb_TFODAPI/flirRGB/test/thermal_annotations.json'
-    data = Dataset(jsonPath, annFolder)
-    data.convertXML()
-
+    parser = argparse.ArgumentParser(description='Coco to voc')
+    parser.add_argument('--json_path', type=str, default=None,
+        help='path to annotation files directory. It is not need when use --ann_paths_list')
+    parser.add_argument('--annFolder', type=str, default=None,
+        help='path to label list.')
+    args = parser.parse_args()
+    data = Dataset(args.json_path, args.annFolder)
+    data.convertXML(args.annFolder)
